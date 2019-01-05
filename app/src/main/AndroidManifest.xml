@@ -19,4 +19,5 @@
         <activity android:name=".ScoreScreen"></activity>
     </application>
 
+
 </manifest>
