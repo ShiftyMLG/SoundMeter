@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     onResume();
                 }else{
                     onPause();
+                    Tscore.setText("score");
                 }
             }
         });
@@ -86,19 +87,19 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             if(lastLevel > 0 && lastLevel <= 50){
                                 //toast message?
-                                Log.i("micReader","low value");
+                                //Log.i("micReader","low value");
                             }else
                             if(lastLevel > 50 && lastLevel <= 100){
                                 //toast message?
-                                Log.i("micReader","medium value");
+                                //Log.i("micReader","medium value");
                             }else
                             if(lastLevel > 100 && lastLevel <= 170){
                                 //toast message?
-                                Log.i("micReader","high value");
+                                //Log.i("micReader","high value");
                             }
                             if(lastLevel > 170){
                                 //toast message?
-                                Log.i("micReader","insane value");
+                               // Log.i("micReader","insane value");
                             }
                         }
                     });
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 Tscore.setText(Integer.toString(scoreValue));
                 progressBar.setProgress(scoreValue);
 
-                Log.i("micReader",Integer.toString(scoreValue));
+               // Log.i("micReader",Integer.toString(scoreValue));
                 setMaxScoreValue();
             }
 
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (Exception e) {e.printStackTrace();}
     }
+
     public void OpenLeaderboard(View view) {
         Log.d("TESTING", "Leaderboard button clicked!");
         Intent intent = new Intent(this, ScoreScreen.class);
