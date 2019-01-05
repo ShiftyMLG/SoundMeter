@@ -7,7 +7,9 @@ import android.media.MediaRecorder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,19 +19,19 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     ToggleButton onOff;
+    Button button;
     TextView Tscore;
     TextView TmaxScore;
     ProgressBar progressBar;
     int scoreValue;
     int maxScoreValue;
 
-    private static final int sampleRate = 8000;
+    private static final int sampleRate = 16000;
     private AudioRecord audio;
     private int bufferSize;
     private double lastLevel = 0;
     private Thread thread;
     private static final int SAMPLE_DELAY = 200;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         Tscore = (TextView)findViewById(R.id.Tscore);
         TmaxScore = (TextView)findViewById(R.id.TmaxScore);
+        button = (Button)findViewById(R.id.button);
         onOff = (ToggleButton)findViewById(R.id.onOff);
         onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -46,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                     onResume();
                 }else{
                     onPause();
-                    Tscore.setText("score");
+                   scoreValue = 0;
+                   maxScoreValue = 0;
                 }
             }
         });
@@ -129,11 +133,11 @@ public class MainActivity extends AppCompatActivity {
                     sumLevel += buffer[i];
                 }
                 lastLevel = Math.abs((sumLevel / bufferReadResult));
-                scoreValue = (int)lastLevel;
+                lastLevel = lastLevel / 1000;
+                scoreValue = (int)(lastLevel/(1+lastLevel)*100);
                 Tscore.setText(Integer.toString(scoreValue));
                 progressBar.setProgress(scoreValue);
-
-               // Log.i("micReader",Integer.toString(scoreValue));
+                Log.i("micReader",Integer.toString(scoreValue));
                 setMaxScoreValue();
             }
 
