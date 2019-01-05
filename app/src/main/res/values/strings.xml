@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SoundMeter</string>
+    <string name="activity2_Scorescreen">scorescreen activity</string>
 </resources>
