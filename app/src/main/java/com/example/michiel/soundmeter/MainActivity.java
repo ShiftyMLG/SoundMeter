@@ -1,8 +1,10 @@
 package com.example.michiel.soundmeter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -51,5 +53,11 @@ MicReader micReader;
             maxScoreValue = scoreValue;
             TmaxScore.setText(Integer.toString(maxScoreValue));
         }
+    }
+
+    public void OpenLeaderboard(View view) {
+        Log.d("TESTING", "Leaderboard button clicked!");
+        Intent intent = new Intent(this, ScoreScreen.class);
+        startActivity(intent);
     }
 }

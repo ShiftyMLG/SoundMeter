@@ -54,7 +54,7 @@
         android:id="@+id/TmaxScore"
         android:layout_width="152dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="Max score"
         android:textSize="30sp"
@@ -69,6 +69,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Leaderboards"
+        android:onClick="OpenLeaderboard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
