@@ -16,11 +16,13 @@ TextView TmaxScore;
 ProgressBar progressBar;
 int scoreValue;
 int maxScoreValue;
-    @Override
+MicReader micReader;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        micReader = new MicReader();
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         Tscore = (TextView)findViewById(R.id.Tscore);
         TmaxScore = (TextView)findViewById(R.id.TmaxScore);
