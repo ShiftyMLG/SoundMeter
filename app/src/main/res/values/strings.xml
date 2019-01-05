@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">SoundMeter</string>
     <string name="activity2_Scorescreen">scorescreen activity</string>
+    <string name="text_maxScore">Max score</string>
+    <string name="text_score">score</string>
 </resources>
