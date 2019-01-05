@@ -14,7 +14,6 @@ public class ScoreScreen extends AppCompatActivity {
         setContentView(R.layout.activity_score_screen);
     }
 
-
     public void openMainActivity(View view) {
         Log.d("TESTING", "Back button clicked!");
         Intent backIntent = new Intent(this, MainActivity.class);

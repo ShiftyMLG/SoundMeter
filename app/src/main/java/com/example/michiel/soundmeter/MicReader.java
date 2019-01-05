@@ -13,7 +13,7 @@ public class MicReader extends Activity {
     private AudioRecord audio;
     private int bufferSize;
     public double lastLevel = 0;
-    private Thread thread;
+    public Thread thread;
     private static final int SAMPLE_DELAY = 75;
 
 
@@ -31,7 +31,7 @@ public class MicReader extends Activity {
         }
     }
 
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         audio = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate,
                 AudioFormat.CHANNEL_IN_MONO,
@@ -96,7 +96,7 @@ public class MicReader extends Activity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         thread.interrupt();
         thread = null;
