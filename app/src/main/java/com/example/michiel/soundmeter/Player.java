@@ -1,13 +1,14 @@
 package com.example.michiel.soundmeter;
 
 public class Player {
-
+    private Firebase database;
     private String mPlayerName;
     private int mPlayerScore;
 
     public Player(String mPlayerName, int mPlayerScore){
         this.mPlayerName = mPlayerName;
         this.mPlayerScore = mPlayerScore;
+        database.zad();
     }
 
 

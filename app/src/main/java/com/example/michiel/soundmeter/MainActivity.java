@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void makePlayer(){
-        int size = 98;
+        int size = 90;
         playerName = Tusername.getText().toString();
         player = new Player(playerName, maxScoreValue);
         int space = size - player.getName().toCharArray().length -  Integer.toString(maxScoreValue).toCharArray().length;
