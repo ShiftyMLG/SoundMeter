@@ -44,7 +44,8 @@
         android:layout_width="92dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:textSize="30sp"
+        android:textSize="26sp"
+        android:gravity="center_vertical"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/MaxScore"
         app:layout_constraintTop_toTopOf="parent" />
