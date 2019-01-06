@@ -1,5 +1,6 @@
 package com.example.michiel.soundmeter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -20,6 +21,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     public String playerName;
     ArrayList<String> players_list;
 
+    public static final String filename = "playerData";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("micReader","onresume");
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     makePlayer();
+                    fileHandler();
+                    readFile();
                     scoreValue = 0;
                     Tscore.setText(Integer.toString(scoreValue));
                     Pause();
@@ -181,19 +191,13 @@ public class MainActivity extends AppCompatActivity {
     public void OpenLeaderboard(View view) {
         Log.d("TESTING", "Leaderboard button clicked!");
         Intent intent = new Intent(this, ScoreScreen.class);
-        intent.putStringArrayListExtra("players", (ArrayList<String>) players_list );
         startActivity(intent);
     }
 
     public void makePlayer(){
-        int size = 90;
         playerName = Tusername.getText().toString();
         player = new Player(playerName, maxScoreValue);
-        int space = size - player.getName().toCharArray().length -  Integer.toString(maxScoreValue).toCharArray().length;
-        String spacing = "";
-        for(int i = 0; i < space; i++)
-            spacing += " ";
-        players_list.add(player.getName() + spacing + Integer.toString(maxScoreValue));
+        players_list.add(player.getName().replace(" ", "_") + " " + Integer.toString(maxScoreValue));
         Log.i("playerinfo", players_list.get(0));
     }
 
@@ -202,4 +206,41 @@ public class MainActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    private void fileHandler() {
+        FileOutputStream outputStream;
+
+
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_APPEND);
+            String str = (player.getName().replace(" ", "_") + " "  + Integer.toString(player.getScore()) + "\n");
+            outputStream.write(str.getBytes());
+            outputStream.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    private String readFile(){
+        File directory = this.getFilesDir();
+        File file = new File(directory, filename);
+        String out = "";
+        StringBuilder b = new StringBuilder();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while((line = br.readLine()) != null){
+                b.append(line);
+                b.append("\n");
+            }
+            br.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        Log.i("ReadFile", b.toString());
+        return b.toString();
+    }
 }
