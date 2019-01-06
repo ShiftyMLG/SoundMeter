@@ -18,7 +18,6 @@ import android.widget.ToggleButton;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
-    ToggleButton onOff;
     Button button;
     TextView Tscore;
     TextView TmaxScore;
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private double lastLevel = 0;
     private Thread thread;
     private static final int SAMPLE_DELAY = 200;
+    private boolean startup = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +41,21 @@ public class MainActivity extends AppCompatActivity {
         Tscore = (TextView)findViewById(R.id.Tscore);
         TmaxScore = (TextView)findViewById(R.id.TmaxScore);
         button = (Button)findViewById(R.id.button);
-        onOff = (ToggleButton)findViewById(R.id.onOff);
-        onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        button.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    onResume();
-                }else{
-                    onPause();
-                   scoreValue = 0;
-                   maxScoreValue = 0;
+            public boolean onTouch(View v, MotionEvent event) {
+                if( event.getAction() == MotionEvent.ACTION_DOWN){
+                    Resume();
+                    Log.i("micReader","onresume");
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    scoreValue = 0;
+                    Tscore.setText(Integer.toString(scoreValue));
+                    Pause();
                 }
+                return false;
             }
         });
+
         try {
             bufferSize = AudioRecord
                     .getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO,
@@ -70,12 +72,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected void onResume() {
-        super.onResume();
+    protected void Resume() {
+        Log.i("micReader", "in onResume()");
         audio = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate,
                 AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, bufferSize);
-        Log.i("micReader", "in onResume()");
+        maxScoreValue = 0;
+        TmaxScore.setText(Integer.toString(maxScoreValue));
+        Log.i("score","maxScoreValue: " + maxScoreValue);
         audio.startRecording();
         Log.i("micReader", "audio.startRecording()");
         thread = new Thread(new Runnable() {
@@ -125,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             int bufferReadResult = 1;
 
             if (audio != null) {
-
                 // Sense the voice...
                 bufferReadResult = audio.read(buffer, 0, bufferSize);
                 double sumLevel = 0;
@@ -146,9 +149,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    protected void Pause() {
         thread.interrupt();
         thread = null;
         try {
