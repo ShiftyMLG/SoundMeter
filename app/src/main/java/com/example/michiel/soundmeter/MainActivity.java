@@ -66,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if( event.getAction() == MotionEvent.ACTION_DOWN){
-                    //Resume();
+                    Resume();
                     Log.i("micReader","onresume");
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     makePlayer();
                     scoreValue = 0;
                     Tscore.setText(Integer.toString(scoreValue));
-                    //Pause();
+                    Pause();
 
                 }
                 return false;
