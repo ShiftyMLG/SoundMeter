@@ -14,33 +14,37 @@ import java.util.Arrays;
 import java.util.List;
 public class ScoreScreen extends AppCompatActivity {
 
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> players_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_screen);
+        Intent intent = getIntent();
+        players_list = intent.getStringArrayListExtra("players");
+
 
         final ListView lv = (ListView) findViewById(R.id.leaderboardList);
 
-        // Initializing a new String Array
-        String[] fruits = new String[] {
-                "Jonas van Hoof",
-                "Tom Meyers"
-        };
-
-        final List<String> fruits_list = new ArrayList<String>(Arrays.asList(fruits));
-
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, fruits_list);
+         arrayAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_list_item_1, players_list);
 
         lv.setAdapter(arrayAdapter);
-
-        fruits_list.add("Michiel Meurs");
     }
+
 
     public void openMainActivity(View view) {
         Log.d("TESTING", "Back button clicked!");
         Intent backIntent = new Intent(this, MainActivity.class);
+        backIntent.putStringArrayListExtra("players", (ArrayList<String>) players_list );
         startActivity(backIntent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putStringArrayList("players", (ArrayList<String>) players_list );
     }
 }
 

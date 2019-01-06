@@ -4,20 +4,31 @@ import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button button;
     TextView Tscore;
     TextView TmaxScore;
     ProgressBar progressBar;
+    EditText Tusername;
     int scoreValue;
     int maxScoreValue;
 
@@ -28,14 +39,25 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
     private static final int SAMPLE_DELAY = 200;
 
+    public Player player;
+    public String playerName;
+    ArrayList<String> players_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Tusername = (EditText) findViewById(R.id.inputUsername);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         Tscore = (TextView)findViewById(R.id.Tscore);
         TmaxScore = (TextView)findViewById(R.id.TmaxScore);
         button = (Button)findViewById(R.id.button);
+        Intent intent = getIntent();
+        players_list= new ArrayList<String>();
+        ArrayList<String> holder = intent.getStringArrayListExtra("players");
+        if(holder != null)
+            players_list = holder;
+
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -43,9 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     Resume();
                     Log.i("micReader","onresume");
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    makePlayer();
                     scoreValue = 0;
                     Tscore.setText(Integer.toString(scoreValue));
                     Pause();
+
                 }
                 return false;
             }
@@ -147,6 +171,15 @@ public class MainActivity extends AppCompatActivity {
     public void OpenLeaderboard(View view) {
         Log.d("TESTING", "Leaderboard button clicked!");
         Intent intent = new Intent(this, ScoreScreen.class);
+        intent.putStringArrayListExtra("players", (ArrayList<String>) players_list );
         startActivity(intent);
     }
+
+    public void makePlayer(){
+        playerName = Tusername.getText().toString();
+        player = new Player(playerName, 55);
+        players_list.add(player.getName());
+        Log.i("playerinfo", players_list.get(0));
+    }
+
 }
