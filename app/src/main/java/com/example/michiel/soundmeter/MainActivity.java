@@ -192,9 +192,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void makePlayer(){
+        int size = 70;
         playerName = Tusername.getText().toString();
-        player = new Player(playerName, 55);
-        players_list.add(player.getName());
+        player = new Player(playerName, maxScoreValue);
+        int space = size - player.getName().toCharArray().length -  Integer.toString(maxScoreValue).toCharArray().length;
+        String spacing = "";
+        for(int i = 0; i < space; i++)
+            spacing += " ";
+        players_list.add(player.getName() + spacing + Integer.toString(maxScoreValue));
         Log.i("playerinfo", players_list.get(0));
     }
 
