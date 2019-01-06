@@ -37,7 +37,7 @@ public class Notification extends AppCompatActivity {
         NotificationCompat.Builder notifyBuilder = new NotificationCompat
                 .Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("title")
-                .setContentText("contenttext")
+                .setContentText("contentText")
                 //.setSmallIcon(R.drawable.ic_android)
                 .setAutoCancel(true).setContentIntent(notificationPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
