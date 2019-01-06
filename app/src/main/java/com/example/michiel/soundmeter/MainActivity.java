@@ -11,6 +11,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -86,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             android.util.Log.e("TrackingFlow", "Exception", e);
         }
+
+        Tusername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
     }
 
     private void setMaxScoreValue(){
@@ -203,5 +213,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i("playerinfo", players_list.get(0));
     }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(MainActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }
