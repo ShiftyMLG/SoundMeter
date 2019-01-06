@@ -203,4 +203,5 @@ public class MainActivity extends AppCompatActivity {
         Log.i("playerinfo", players_list.get(0));
     }
 
+
 }
