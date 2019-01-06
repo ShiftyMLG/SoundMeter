@@ -14,9 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 public class ScoreScreen extends AppCompatActivity {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
