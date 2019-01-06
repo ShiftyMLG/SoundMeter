@@ -19,9 +19,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private double lastLevel = 0;
     private Thread thread;
     private static final int SAMPLE_DELAY = 200;
-    private boolean startup = true;
 
     public Player player;
     public String playerName;
@@ -112,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 AudioFormat.ENCODING_PCM_16BIT, bufferSize);
         maxScoreValue = 0;
         TmaxScore.setText(Integer.toString(maxScoreValue));
-        Log.i("score","maxScoreValue: " + maxScoreValue);
+        Log.i("micReader","maxScoreValue: " + maxScoreValue);
         audio.startRecording();
         Log.i("micReader", "audio.startRecording()");
         thread = new Thread(new Runnable() {
@@ -129,18 +125,6 @@ public class MainActivity extends AppCompatActivity {
                             if(lastLevel > 0 && lastLevel <= 50){
                                 //toast message?
                                 //Log.i("micReader","low value");
-                            }else
-                            if(lastLevel > 50 && lastLevel <= 100){
-                                //toast message?
-                                //Log.i("micReader","medium value");
-                            }else
-                            if(lastLevel > 100 && lastLevel <= 170){
-                                //toast message?
-                                //Log.i("micReader","high value");
-                            }
-                            if(lastLevel > 170){
-                                //toast message?
-                               // Log.i("micReader","insane value");
                             }
                         }
                     });
