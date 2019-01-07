@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+*
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private int bufferSize;
     private double lastLevel = 0;
     private Thread thread;
-    private static final int SAMPLE_DELAY = 200;
+    private static final int SAMPLE_DELAY = 150;
 
     public Player player;
     public String playerName;
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> holder = intent.getStringArrayListExtra("players");
         if(holder != null)
             players_list = holder;
-
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
