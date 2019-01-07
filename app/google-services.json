@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "835318445714",
+    "firebase_url": "https://soundmeter-65b22.firebaseio.com",
+    "project_id": "soundmeter-65b22",
+    "storage_bucket": "soundmeter-65b22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835318445714:android:0b486a354e7802c7",
+        "android_client_info": {
+          "package_name": "com.example.michiel.soundmeter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835318445714-9mog0ria4mlt7sbubfc789s4ng8aqv42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.michiel.soundmeter",
+            "certificate_hash": "1d6e9c9c09aaf5988f21545861e60fc4d01fa604"
+          }
+        },
+        {
+          "client_id": "835318445714-jdl68irlu9h1l8ski6udff02rp5l13b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeKN1Sp7wIJ8KXEOQ9Jf4P7kYjiGo-rdY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835318445714-jdl68irlu9h1l8ski6udff02rp5l13b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
